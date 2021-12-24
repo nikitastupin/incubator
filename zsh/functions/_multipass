@@ -1,0 +1,34 @@
+#compdef multipass
+
+# multipass --help
+# pbpaste | sed -E "s/^ */'/g; s/$/'/g; s/ {2,}/:/g" | tr '[:upper:]' '[:lower:]'
+local -a commands
+commands=(
+'alias:create an alias'
+'aliases:list available aliases'
+'delete:delete instances'
+'exec:run a command on an instance'
+'find:display available images to create instances from'
+'get:get a configuration setting'
+'help:display help about a command'
+'info:display information about instances'
+'launch:create and start an ubuntu instance'
+'list:list all available instances'
+'mount:mount a local directory in the instance'
+'networks:list available network interfaces'
+'purge:purge all deleted instances permanently'
+'recover:recover deleted instances'
+'restart:restart instances'
+'set:set a configuration setting'
+'shell:open a shell on a running instance'
+'start:start instances'
+'stop:stop running instances'
+'suspend:suspend running instances'
+'transfer:transfer files between the host and instances'
+'umount:unmount a directory from an instance'
+'unalias:remove an alias'
+'version:show version details'
+)
+
+_arguments \
+  "1: :{_describe command commands}"  
