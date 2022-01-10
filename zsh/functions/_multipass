@@ -93,7 +93,7 @@ _multipass_stop() {
       {-t,--time}: \
     + '(cancel)' \
       {-c,--cancel} \
-      '*:name:_instances'
+      '*::name:_instances_running'
 }
 
 _multipass_version() {
@@ -111,6 +111,12 @@ _instances() {
   # from _adb
   local -a instances
   instances=( $(multipass list --format csv | tail -n +2 | cut -f 1 -d ,) )
+  _describe -t names 'instances' instances
+}
+
+_instances_running() {
+  local -a instances
+  instances=( $(multipass list --format csv | tail -n +2 | grep Running | cut -f 1 -d ,) )
   _describe -t names 'instances' instances
 }
 
