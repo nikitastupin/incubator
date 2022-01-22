@@ -60,7 +60,7 @@ _multipass_delete() {
 
 _multipass_exec() {
   _arguments \
-    ':name:_instances'
+    ':name:_instances_running'
 }
 
 _multipass_get() {
