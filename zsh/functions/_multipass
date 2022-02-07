@@ -73,6 +73,13 @@ _multipass_purge() {
   # the purge subcommand takes no arguments
 }
 
+_multipass_restart() {
+  _arguments \
+    --all \
+    --timeout: \
+    ':name:_instances_running'
+}
+
 _multipass_shell() {
   _arguments \
     --timeout: \
