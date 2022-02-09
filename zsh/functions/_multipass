@@ -69,6 +69,13 @@ _multipass_get() {
     ':key:_configuration_settings'
 }
 
+_multipass_info() {
+  _arguments \
+    --all \
+    '--format: :(table json csv yaml)' \
+    ':name:_instances'
+}
+
 _multipass_purge() {
   # the purge subcommand takes no arguments
 }
