@@ -1,0 +1,4 @@
+URL="$1"
+OWNER="$(echo "$1" | cut -d / -f 4)"
+REPO="$(echo "$1" | cut -d / -f 5)"
+git clone "$URL" "$OWNER/$REPO"
