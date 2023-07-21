@@ -1,4 +1,8 @@
-URL="$1"
-OWNER="$(echo "$1" | cut -d / -f 4)"
-REPO="$(echo "$1" | cut -d / -f 5)"
-git clone "$URL" "$OWNER/$REPO"
+readonly URL="$1"
+readonly OWNER="$(echo "$1" | cut -d / -f 4)"
+readonly REPO="$(echo "$1" | cut -d / -f 5)"
+readonly DIR="$HOME/repos/$OWNER/$REPO"
+
+git clone "https://github.com/$OWNER/$REPO" "$DIR"
+
+cd "$DIR"
