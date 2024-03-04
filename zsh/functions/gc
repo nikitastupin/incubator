@@ -1,6 +1,13 @@
 readonly URL="$1"
+
+if ! [[ "$URL" =~ '^https://github\.com/' ]]; then
+    echo 'usage: gc html_url' >&2
+    echo '    html_url  e.g. https://github.com/nikitastupin/incubator' >&2
+    exit 1
+fi
+
 readonly OWNER="$(echo "$1" | cut -d / -f 4)"
-readonly REPO="$(echo "$1" | cut -d / -f 5)"
+readonly REPO="$( echo "$1" | cut -d / -f 5)"
 readonly DIR="$HOME/repos/$OWNER/$REPO"
 
 git clone "https://github.com/$OWNER/$REPO" "$DIR"
