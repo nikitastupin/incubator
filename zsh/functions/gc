@@ -1,15 +1,25 @@
+readonly GITHUB_PREFIX_RE='^https://github\.com/([0-9a-zA-Z-]+)/([0-9a-zA-Z-]+)'
 readonly URL="$1"
 
-if ! [[ "$URL" =~ '^https://github\.com/' ]]; then
-    echo 'usage: gc html_url' >&2
-    echo '    html_url  e.g. https://github.com/nikitastupin/incubator' >&2
-    return 1
+if [[ "$URL" =~ ${GITHUB_PREFIX_RE}/tree/([0-9a-f]{40}) ]]; then
+  readonly  OWNER="${match[1]}"
+  readonly   REPO="${match[2]}"
+  readonly COMMIT="${match[3]}"
+elif [[ "$URL" =~ ${GITHUB_PREFIX_RE} ]]; then
+  readonly  OWNER="${match[1]}"
+  readonly   REPO="${match[2]}"
+else
+  echo 'usage: gc html_url' >&2
+  echo '  html_url  e.g. https://github.com/ethereum/go-ethereum or https://github.com/zkemail/zk-regex/tree/531575345558ba938675d725bd54df45c866ef74' >&2
+  return 1
 fi
 
-readonly OWNER="$(echo "$1" | cut -d / -f 4)"
-readonly REPO="$( echo "$1" | cut -d / -f 5)"
-readonly DIR="$HOME/repos/$OWNER/$REPO"
+readonly DIRECTORY="$HOME/github.com/$OWNER/$REPO"
 
-git clone "https://github.com/$OWNER/$REPO" "$DIR"
+git clone "https://github.com/$OWNER/$REPO" "$DIRECTORY"
 
-cd "$DIR"
+if [[ -n "$COMMIT" ]]; then
+  git -C "$DIRECTORY" checkout "$COMMIT"
+fi
+
+cd "$DIRECTORY"
