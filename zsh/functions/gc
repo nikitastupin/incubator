@@ -14,7 +14,7 @@ else
   return 1
 fi
 
-readonly DIRECTORY="$HOME/github.com/$OWNER/$REPO"
+readonly DIRECTORY="$HOME/repos/$OWNER/$REPO"
 
 git clone "https://github.com/$OWNER/$REPO" "$DIRECTORY"
 
